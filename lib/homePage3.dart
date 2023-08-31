@@ -17,10 +17,12 @@ class _HomePageThreeState extends State<HomePageThree> {
     final response =
         await http.get(Uri.parse('https://jsonplaceholder.typicode.com/users'));
     final data = jsonDecode(response.body.toString());
-    if (response.statusCode == 200) {
+
+    if (response.statusCode == 200 && userList.isEmpty) {
       for (Map<String, dynamic> i in data) {
         userList.add(UserModel.fromMap(i));
       }
+      print(userList.length);
       return userList;
     } else
       return userList;
@@ -63,8 +65,8 @@ class _HomePageThreeState extends State<HomePageThree> {
               return Card(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20)),
-                  margin:
-                      EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 4),
+                  margin: EdgeInsets.only(
+                      left: 10, right: 10, top: 1.5, bottom: 10),
                   elevation: 5,
                   child: Container(
                     decoration: BoxDecoration(
